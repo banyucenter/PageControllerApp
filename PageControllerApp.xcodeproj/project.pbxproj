@@ -14,6 +14,7 @@
 		28ADAF4224E1142A0033B69C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28ADAF4124E1142A0033B69C /* Preview Assets.xcassets */; };
 		28ADAF4524E1142A0033B69C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28ADAF4324E1142A0033B69C /* LaunchScreen.storyboard */; };
 		28ADAF4D24E115DF0033B69C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADAF4C24E115DF0033B69C /* PageViewController.swift */; };
+		28ADAF4F24E123B60033B69C /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28ADAF4E24E123B60033B69C /* PageControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		28ADAF4424E1142A0033B69C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28ADAF4624E1142A0033B69C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28ADAF4C24E115DF0033B69C /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		28ADAF4E24E123B60033B69C /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				28ADAF4624E1142A0033B69C /* Info.plist */,
 				28ADAF4024E1142A0033B69C /* Preview Content */,
 				28ADAF4C24E115DF0033B69C /* PageViewController.swift */,
+				28ADAF4E24E123B60033B69C /* PageControl.swift */,
 			);
 			path = PageControllerApp;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28ADAF4F24E123B60033B69C /* PageControl.swift in Sources */,
 				28ADAF3924E114280033B69C /* AppDelegate.swift in Sources */,
 				28ADAF3B24E114280033B69C /* SceneDelegate.swift in Sources */,
 				28ADAF3D24E114280033B69C /* ContentView.swift in Sources */,

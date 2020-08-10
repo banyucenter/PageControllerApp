@@ -19,6 +19,9 @@ import SwiftUI
 
 struct PageViewController : UIViewControllerRepresentable{
     
+    //17 hubungan dengan binding
+    @Binding var currentPageIndex: Int
+    
     var viewControllers: [UIViewController]
 
     
@@ -37,6 +40,13 @@ struct PageViewController : UIViewControllerRepresentable{
         //9 Karena subkelas Koordinator kami sekarang sesuai dengan protokol UIPageViewControllerDataSource, kami dapat menetapkannya sebagai sumber data PageViewControllers di dalam metode makeViewController kami.
 
         pageViewController.dataSource = context.coordinator
+        
+        //21 Metode dipanggil ketika gesekan pengguna selesai. Jika demikian, kami kemudian mengambil subview yang ditampilkan dan menemukan posisinya di dalam array viewControllers. Bergantung pada nilai itu, kita kemudian bisa memperbarui pengikatan currentPageIndex yang juga memperbarui Status saatPageIndex dari OnboardingView.
+
+//        Mirip seperti yang kita lakukan dengan pola sumber data di tutorial terakhir, mari tetapkan Koordinator sebagai delegasi PageViewController di dalam fungsi makeUIViewController.
+        pageViewController.delegate = context.coordinator
+        
+        //22 go to file PageControl.Swift
 
         //balikan nilai adalah pageViewController
         return pageViewController
@@ -49,14 +59,19 @@ struct PageViewController : UIViewControllerRepresentable{
     func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
         print("OK")
         pageViewController.setViewControllers(
-            [viewControllers[0]], direction: .forward, animated: true)
+//            [viewControllers[0]], direction: .forward, animated: true)
+            
+            
+            //18 update page sesuai binding yaitu berubah sesuai current page
+        [viewControllers[currentPageIndex]], direction: .forward, animated: true)
+        
     }
 
    
     
     //5 Koordinator diimplementasikan dengan membuat subclass di dalam PageViewController, yang kemudian bisa kita gunakan untuk mengimplementasikan fungsi sumber data umum yang kita perlukan untuk memberi tahu PageViewController subview mana yang akan ditampilkan saat pengguna menggeser.
     
-    class Coordinator: NSObject, UIPageViewControllerDataSource {
+    class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         
         //7 Seperti yang dikatakan, kami dapat menggunakan Koordinator kami untuk menerapkan pola Kakao umum, seperti delegasi, sumber data, dan menanggapi masukan pengguna. Kami ingin Koordinator kami bertindak sebagai sumber data untuk *UIPageViewController* kami. Jadi, mari sesuaikan Subkelas Koordinator dengan protokol UIPageViewControllerDataSource.
 
@@ -64,6 +79,17 @@ struct PageViewController : UIViewControllerRepresentable{
 
         init(_ pageViewController: PageViewController) {
             self.parent = pageViewController
+        }
+        
+        
+        //20 update state jika ada swipes. Memperbarui currentPageIndex bisa dilakukan dengan pola delegasi. Metode yang tepat untuk digunakan adalah fungsi didFinishAnimating. Karena, seperti yang Anda pelajari di bagian terakhir, tempat yang tepat untuk menyisipkan metode delegasi adalah subkelas Koordinator, mari kita menyesuaikan kelas ini dengan protokol UIPageViewControllerDelegate dan menyisipkan metode didFinishAnimating di sana:
+        func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+            if completed,
+                let visibleViewController = pageViewController.viewControllers?.first,
+                let index = parent.viewControllers.firstIndex(of: visibleViewController)
+            {
+                parent.currentPageIndex = index
+            }
         }
         
         
